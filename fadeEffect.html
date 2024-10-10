@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swiper Fade Effect Example</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .swiper {
+        width: 600px;
+        height: 400px;
+      }
+
+      .swiper-slide {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        color: #333;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+
+      .swiper-slide-active {
+        opacity: 1; /* Make active slide fully visible */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">Card 1</div>
+        <div class="swiper-slide">Card 2</div>
+        <div class="swiper-slide">Card 3</div>
+        <div class="swiper-slide">Card 4</div>
+        <div class="swiper-slide">Card 5</div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Navigation -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper(".swiper", {
+        effect: "creative",
+        creativeEffect: {
+          prev: {
+            translate: ["-20%", 0, -1],
+            opacity: 0,
+          },
+          next: {
+            translate: ["20%", 0, 0],
+            opacity: 0,
+          },
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+  </body>
+</html>

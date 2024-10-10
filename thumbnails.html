@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiper with Thumbnails</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+      .container {
+    width: 80%;
+    margin: auto;
+}
+
+.swiper {
+    width: 100%;
+    height: 400px;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.mySwiperThumbnails {
+    height: 100px; /* Ajuster la hauteur des vignettes */
+}
+
+.mySwiperThumbnails .swiper-slide {
+    width: 80px; /* Ajuster la largeur des vignettes */
+    height: 80px; /* Ajuster la hauteur des vignettes */
+}
+
+.mySwiperThumbnails .swiper-slide img {
+    object-fit: cover;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Swiper -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="image1.jpg" alt="Image 1"></div>
+                <div class="swiper-slide"><img src="image2.jpg" alt="Image 2"></div>
+                <div class="swiper-slide"><img src="image3.jpg" alt="Image 3"></div>
+                <div class="swiper-slide"><img src="image4.jpg" alt="Image 4"></div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+        <!-- Thumbnail Swiper -->
+        <div class="swiper mySwiperThumbnails">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="image1.jpg" alt="Thumbnail 1"></div>
+                <div class="swiper-slide"><img src="image2.jpg" alt="Thumbnail 2"></div>
+                <div class="swiper-slide"><img src="image3.jpg" alt="Thumbnail 3"></div>
+                <div class="swiper-slide"><img src="image4.jpg" alt="Thumbnail 4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      // Initialize main Swiper
+const swiper = new Swiper(".mySwiper", {
+    spaceBetween: 10,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+});
+
+// Initialize thumbnail Swiper
+const swiperThumbnails = new Swiper(".mySwiperThumbnails", {
+    spaceBetween: 10,
+    slidesPerView: 4, // Number of thumbnails visible
+    slideToClickedSlide: true, // Make thumbnails clickable
+});
+
+// Link the two swipers
+swiperThumbnails.on('click', function (swiper, e) {
+    const clickedIndex = swiper.clickedIndex; // Get index of clicked thumbnail
+    swiper.slideTo(clickedIndex); // Slide to the corresponding main slide
+});
+
+// Update main swiper to follow thumbnail swiper
+swiperThumbnails.on('transitionEnd', function () {
+    const activeIndex = swiperThumbnails.activeIndex; // Get active index of thumbnail swiper
+    swiper.slideTo(activeIndex); // Slide to the corresponding main slide
+});
+
+    </script>
+</body>
+</html>
